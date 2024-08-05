@@ -1,0 +1,334 @@
+definitions:
+  models.CreateRequestBody:
+    properties:
+      description:
+        type: string
+      title:
+        type: string
+    type: object
+  models.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  models.LoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  models.SignUpRequest:
+    properties:
+      email:
+        type: string
+      name:
+        minLength: 3
+        type: string
+      password:
+        maxLength: 20
+        minLength: 6
+        type: string
+    type: object
+  models.UpdateRequestBody:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+  pb.AddTodoResponse:
+    properties:
+      Description:
+        type: string
+      ID:
+        type: integer
+      Title:
+        type: string
+    type: object
+  pb.DeleteTodoResponse:
+    properties:
+      status:
+        type: string
+    type: object
+  pb.ListTodoResponse:
+    properties:
+      ListTodos:
+        items:
+          $ref: '#/definitions/pb.TodoDetails'
+        type: array
+    type: object
+  pb.LoginResponse:
+    properties:
+      accesstoken:
+        type: string
+      info:
+        $ref: '#/definitions/pb.UserInfo'
+      refreshtoken:
+        type: string
+    type: object
+  pb.SignupResponse:
+    properties:
+      accesstoken:
+        type: string
+      info:
+        $ref: '#/definitions/pb.UserInfo'
+      refreshtoken:
+        type: string
+    type: object
+  pb.TodoDetails:
+    properties:
+      Description:
+        type: string
+      ID:
+        type: integer
+      Title:
+        type: string
+    type: object
+  pb.TodoItemResponse:
+    properties:
+      Description:
+        type: string
+      ID:
+        type: integer
+      Title:
+        type: string
+    type: object
+  pb.UpdateTodoResponse:
+    properties:
+      Description:
+        type: string
+      ID:
+        type: integer
+      Title:
+        type: string
+    type: object
+  pb.UserInfo:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+info:
+  contact:
+    name: API Support
+  description: Watch Hive is an E-commerce platform to purchase Watch
+  title: Go + Gin E-Commerce API Watch Hive
+  version: 1.0.0
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: user can log in by giving their details
+      parameters:
+      - description: User Login
+        in: body
+        name: UserLoginDetail
+        required: true
+        schema:
+          $ref: '#/definitions/models.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Login successfully
+          schema:
+            $ref: '#/definitions/pb.LoginResponse'
+        "500":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: User Login
+      tags:
+      - User
+  /signup:
+    post:
+      consumes:
+      - application/json
+      description: user can signup by giving their details
+      parameters:
+      - description: User Signup
+        in: body
+        name: UserSignupDetail
+        required: true
+        schema:
+          $ref: '#/definitions/models.SignUpRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Returns the newly created user
+          schema:
+            $ref: '#/definitions/pb.SignupResponse'
+        "400":
+          description: Error response
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "502":
+          description: Bad gateway
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: User Signup
+      tags:
+      - User
+  /todo:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a todo item with the provided ID
+      parameters:
+      - description: todo id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Returns the deletion status
+          schema:
+            $ref: '#/definitions/pb.DeleteTodoResponse'
+        "400":
+          description: Error response
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "502":
+          description: Bad gateway
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: Delete a todo item
+    get:
+      consumes:
+      - application/json
+      description: List all todo items with pagination support
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: string
+      - description: Page size
+        in: query
+        name: count
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Returns the list of todo items
+          schema:
+            $ref: '#/definitions/pb.ListTodoResponse'
+        "400":
+          description: Error response
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "502":
+          description: Bad gateway
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: List all todo items
+    post:
+      consumes:
+      - application/json
+      description: Create a new todo item with the provided details
+      parameters:
+      - description: Todo item details
+        in: body
+        name: b
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateRequestBody'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Returns the newly created todo item
+          schema:
+            $ref: '#/definitions/pb.AddTodoResponse'
+        "400":
+          description: Error response
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "502":
+          description: Bad gateway
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: Create a new todo item
+    put:
+      consumes:
+      - application/json
+      description: Update a todo item with the provided details
+      parameters:
+      - description: Todo item details to update
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Returns the updated todo item
+          schema:
+            $ref: '#/definitions/pb.UpdateTodoResponse'
+        "400":
+          description: Error response
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "502":
+          description: Bad gateway
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: Update a todo item
+  /todo/get:
+    get:
+      consumes:
+      - application/json
+      description: Get a todo item details by the provided ID
+      parameters:
+      - description: todo id
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Returns the fetched todo item
+          schema:
+            $ref: '#/definitions/pb.TodoItemResponse'
+        "400":
+          description: Error response
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "502":
+          description: Bad gateway
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: Get a todo item by ID
+securityDefinitions:
+  BearerTokenAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
