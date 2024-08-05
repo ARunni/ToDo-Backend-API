@@ -13,6 +13,7 @@ type Handler struct {
 }
 
 func Init(url string) Handler {
+	
 	db, err := gorm.Open(postgres.Open(url), &gorm.Config{})
 	if err != nil {
 		log.Fatalln(err)
