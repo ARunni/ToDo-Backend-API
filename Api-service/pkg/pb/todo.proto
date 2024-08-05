@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package ="./pkg/pb";
+
+service AuthService{
+    rpc Signup (SignupRequest) returns (SignupResponse){}
+    rpc Login (LoginRequest) returns (LoginResponse){}
+    rpc CreateTodo (AddTodoRequest) returns (AddTodoResponse){}
+    rpc ListTodo (ListTodoRequest) returns(ListTodoResponse){}
+    rpc GetTodoByID (TodoIDRequest) returns (TodoItemResponse){}
+    rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoResponse){}
+    rpc DeleteTodo (TodoIDRequest) returns (DeleteTodoResponse){}
+}
+
+message SignupRequest {
+    string name = 1; 
+    string email = 5;
+    string password = 6;  
+}
+
+message UserInfo {
+    int64 id = 1;
+    string name = 2;
+    string email = 3;
+}
+
+message SignupResponse{
+    UserInfo info = 1;
+    string accesstoken = 2;
+    string refreshtoken = 3;
+}
+
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginResponse{
+    UserInfo info = 1;
+    string accesstoken = 2;
+    string refreshtoken = 3;
+}
+
+message AddTodoRequest {
+    string Title = 1;
+    string Description = 2;
+    int64 UserID = 3;
+
+}
+
+message AddTodoResponse{
+    int64 ID = 1;
+    string Title = 2;
+    string Description = 3;
+}
+
+message ListTodoRequest{
+    int64 Page = 1;
+    int64 Count = 2;
+    int64 UserID = 3;
+}
+
+message TodoDetails {
+    int64 ID = 1;
+    string Title =2;
+    string Description =3;
+}
+
+message ListTodoResponse{
+    repeated TodoDetails ListTodos = 1;
+}
+
+message TodoIDRequest{
+    int64 ID =1;
+    int64 UserID = 2;
+}
+
+message TodoItemResponse{
+    int64 ID = 1;
+    string Title =2;
+    string Description =3;
+}
+
+message DeleteTodoResponse{
+    string status = 1;
+}
+
+message UpdateTodoRequest{
+    int64 ID = 1;
+    string Title =2;
+    string Description =3;
+    int64 UserID = 4;
+}
+message UpdateTodoResponse{
+    int64 ID = 1;
+    string Title =2;
+    string Description =3;
+}
