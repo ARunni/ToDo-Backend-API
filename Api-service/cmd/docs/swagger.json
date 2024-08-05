@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Watch Hive is an E-commerce platform to purchase Watch",
-        "title": "Go + Gin E-Commerce API Watch Hive",
+        "description": "ToDo is a list of activities that is to be done by a particular individual",
+        "title": "Go + Gin TODO APP_Microservice_CleanArchitecture",
         "contact": {
             "name": "API Support"
         },

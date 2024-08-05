@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	// _ "github.com/ARunni/ToDo-Backend-API/Api-service/cmd/api/docs"
+	_ "github.com/ARunni/ToDo-Backend-API/Api-service/cmd/docs"
 	server "github.com/ARunni/ToDo-Backend-API/Api-service/pkg/api/server"
 	"github.com/ARunni/ToDo-Backend-API/Api-service/pkg/config"
 	"github.com/gin-gonic/gin"
