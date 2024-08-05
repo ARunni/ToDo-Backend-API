@@ -20,7 +20,7 @@ import (
 // @Failure 400 {object} models.ErrorResponse "Error response"
 // @Failure 502 {object} models.ErrorResponse "Bad gateway"
 // @Router			/signup    [POST]
-func Signup(ctx *gin.Context, c pb.AuthServiceClient) {
+func Signup(ctx *gin.Context, asc pb.AuthServiceClient) {
 	var UserSignupDetail models.SignUpRequest
 	if err := ctx.ShouldBindJSON(&UserSignupDetail); err != nil {
 		errResp := models.ErrorResponse{
@@ -38,7 +38,7 @@ func Signup(ctx *gin.Context, c pb.AuthServiceClient) {
 		ctx.JSON(http.StatusBadRequest, errResp)
 		return
 	}
-	user, err := c.Signup(context.Background(), &pb.SignupRequest{
+	user, err := asc.Signup(context.Background(), &pb.SignupRequest{
 		Name:     UserSignupDetail.Name,
 		Email:    UserSignupDetail.Email,
 		Password: UserSignupDetail.Password,
@@ -64,7 +64,7 @@ func Signup(ctx *gin.Context, c pb.AuthServiceClient) {
 // @Success		200	{object} pb.LoginResponse "Login successfully"
 // @Failure		500	{object} models.ErrorResponse  "Bad request"
 // @Router			/login     [POST]
-func Login(ctx *gin.Context, c pb.AuthServiceClient) {
+func Login(ctx *gin.Context, asc pb.AuthServiceClient) {
 	var UserLoginDetail models.LoginRequest
 	if err := ctx.ShouldBindJSON(&UserLoginDetail); err != nil {
 		errResp := models.ErrorResponse{
@@ -82,7 +82,7 @@ func Login(ctx *gin.Context, c pb.AuthServiceClient) {
 		ctx.JSON(http.StatusBadRequest, errResp)
 		return
 	}
-	user, err := c.Login(context.Background(), &pb.LoginRequest{
+	user, err := asc.Login(context.Background(), &pb.LoginRequest{
 		Email:    UserLoginDetail.Email,
 		Password: UserLoginDetail.Password,
 	})

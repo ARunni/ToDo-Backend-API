@@ -206,7 +206,7 @@ paths:
           schema:
             $ref: '#/definitions/models.ErrorResponse'
       security:
-      - Bearer: []
+      - BearerTokenAuth: []
       summary: Delete a todo item
     get:
       consumes:
@@ -237,7 +237,7 @@ paths:
           schema:
             $ref: '#/definitions/models.ErrorResponse'
       security:
-      - Bearer: []
+      - BearerTokenAuth: []
       summary: List all todo items
     post:
       consumes:
@@ -266,7 +266,7 @@ paths:
           schema:
             $ref: '#/definitions/models.ErrorResponse'
       security:
-      - Bearer: []
+      - BearerTokenAuth: []
       summary: Create a new todo item
     put:
       consumes:
@@ -295,7 +295,7 @@ paths:
           schema:
             $ref: '#/definitions/models.ErrorResponse'
       security:
-      - Bearer: []
+      - BearerTokenAuth: []
       summary: Update a todo item
   /todo/get:
     get:
@@ -324,7 +324,7 @@ paths:
           schema:
             $ref: '#/definitions/models.ErrorResponse'
       security:
-      - Bearer: []
+      - BearerTokenAuth: []
       summary: Get a todo item by ID
 securityDefinitions:
   BearerTokenAuth:

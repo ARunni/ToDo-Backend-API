@@ -107,7 +107,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "List all todo items with pagination support",
@@ -156,7 +156,7 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "Update a todo item with the provided details",
@@ -202,7 +202,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "Create a new todo item with the provided details",
@@ -248,7 +248,7 @@ const docTemplate = `{
             "delete": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "Delete a todo item with the provided ID",
@@ -294,7 +294,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "Get a todo item details by the provided ID",

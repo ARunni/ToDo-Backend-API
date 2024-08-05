@@ -99,7 +99,7 @@
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "List all todo items with pagination support",
@@ -148,7 +148,7 @@
             "put": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "Update a todo item with the provided details",
@@ -194,7 +194,7 @@
             "post": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "Create a new todo item with the provided details",
@@ -240,7 +240,7 @@
             "delete": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "Delete a todo item with the provided ID",
@@ -286,7 +286,7 @@
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerTokenAuth": []
                     }
                 ],
                 "description": "Get a todo item details by the provided ID",
