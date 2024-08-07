@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres
+    container_name: todo-postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_USER=postgres
+    networks:
+      - todo_network
+    volumes:
+      - todo_volume:/var/lib/postgresql/data
+    ports:
+      - "5431:5432"
+
+  todo-api-gateway:
+    image: todo_api_gateway
+    restart: always
+    container_name: todo-api-gateway
+    networks:
+      - todo_network
+    ports:
+      - "8001:8000"
+
+  todo-services:
+    image: todo_operation_sevice
+    restart: always
+    depends_on:
+      - postgres
+    container_name: todo-operation-sevice
+    networks:
+      - todo_network
+    hostname: todo-operation-sevice
+
+networks:
+  todo_network:
+    driver: bridge
+
+volumes:
+  todo_volume:
